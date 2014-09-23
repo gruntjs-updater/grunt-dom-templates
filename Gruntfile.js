@@ -1,6 +1,6 @@
 /*
- * grunt-dom-tpl
- * https://github.com/kodmax/grunt-dom-tpl
+ * grunt-dom-templates
+ * https://github.com/kodmax/grunt-dom-templates
  *
  * Copyright (c) 2014 kodmax
  * Licensed under the MIT license.
