@@ -44,7 +44,7 @@ module.exports = function(grunt) {
     		'use strict';
     		
     		var root = document.createElement('div');
-    		root.innerHTML = "<ul class=\"home\" tpl-name=\"home\">	<li rv-each-item=\"items\">{ item.label }</li></ul><ul tpl-name=\"home2\">    <li rv-each-item=\"items\">{ item.label }</li></ul><ul tpl-name=\"list\">	<li rv-each-item=\"items\">{ item.label }</li></ul>";
+    		root.innerHTML = "{{{ html }}}";
     		
     		var templates = {};
     		for (var i = 0; i < root.childNodes.length; i++) {
