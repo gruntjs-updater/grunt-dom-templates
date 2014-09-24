@@ -53,15 +53,50 @@ module.exports = function(grunt) {
     			child.removeAttribute('tpl-name');
     		}
     		
+    		var findMarkedNodes = function (parentNode, nodeMap) {
+    			for (var i = 0; i < parentNode.childNodes.length; i++) {
+    				var child = parentNode.childNodes [i];
+
+    				if (child.nodeType === 1) {
+    					var nodeName = child.getAttribute('tpl-node-name');
+    					if (nodeName) {
+    						child.removeAttribute('tpl-node-name');
+    						nodeMap [nodeName] = child;
+    					}
+    				
+    					findMarkedNodes(child, nodeMap);
+    				}			
+    			}
+    		};
+    		
+    		var DOMTree = function (tplNode) {
+    			var cloned = tplNode.cloneNode(true);
+    			var nodeMap = {};
+    			
+    			findMarkedNodes(cloned, nodeMap);
+    			
+    			this.getRootNode = function () {
+    				return cloned;
+    			};
+    			
+    			this.getNodeByName = function (name) {
+    				return nodeMap [name];
+    			};
+    			
+    			this.getAllNamedNodes = function () {
+    				return nodeMap;
+    			};
+    		};
+    		
     		var f = function (templateName, options) {
-    			var cloned = templates [templateName].cloneNode(true);
+    			var domTree = new DOMTree(templates [templateName])
     			options = options || {};
     			
     			if (options.parent) {
-    				options.parent.appendChild(cloned);
+    				options.parent.appendChild(domTree.getRootNode());
     			}
     			
-    			return cloned;
+    			return domTree;
     		};
     		
     		return f;
