@@ -73,7 +73,7 @@ module.exports = function(grunt) {
     			var cloned = tplNode.cloneNode(true);
     			var nodeMap = {};
     			
-    			findMarkedNodes(cloned, nodeMap);
+    			findMarkedNodes({ childNodes: [cloned] }, nodeMap);
     			
     			this.getRootNode = function () {
     				return cloned;
@@ -101,14 +101,14 @@ module.exports = function(grunt) {
     		
     		return f;
     	});
-      };
+      }
       
       // Write the destination file.
-      grunt.file.write(f.dest, (codeTpl + "").replace(/^function codeTpl\(\) {\n/, '').replace(/^\s{5}/mg, '').replace(/}$/, '').replace("{{{ html }}}", src));
+      grunt.file.write(f.dest, (codeTpl + "").replace(/^function codeTpl\(\) {\r?\n/, '').replace(/^\s{5,6}/mg, '').replace(/}$/, '').replace("{{{ html }}}", src));
 
       // Print a success message.
       grunt.log.writeln('File "' + f.dest + '" created.');
-    });
-  });
+								    });
+					});
 
 };
