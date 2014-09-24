@@ -89,7 +89,7 @@ module.exports = function(grunt) {
     		};
     		
     		var f = function (templateName, options) {
-    			var domTree = new DOMTree(templates [templateName])
+    			var domTree = new DOMTree(templates [templateName]);
     			options = options || {};
     			
     			if (options.parent) {
