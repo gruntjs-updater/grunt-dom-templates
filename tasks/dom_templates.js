@@ -69,7 +69,7 @@ module.exports = function(grunt) {
     			}
     		};
     		
-    		var DOMTree = function (tplNode) {
+    		var DOMTree = function (tplNode, templateName) {
     			var cloned = tplNode.cloneNode(true);
     			var nodeMap = {};
     			
@@ -80,6 +80,12 @@ module.exports = function(grunt) {
     			};
     			
     			this.getNodeByName = function (name) {
+    				if (!nodeMap [name]) {
+    					console.warn('Template ' + templateName + ' node ' + name + ' not found. Applying simple polyfill.');
+    					nodeMap [name] = document.createElement('div');
+    					cloned.appendChild(nodeMap [name]);
+    				}
+    				
     				return nodeMap [name];
     			};
     			
@@ -88,8 +94,15 @@ module.exports = function(grunt) {
     			};
     		};
     		
+    		var Exception = function (msg) { this.toString = function () { return msg; }};
+    		
     		var f = function (templateName, options) {
-    			var domTree = new DOMTree(templates [templateName]);
+    			if (!templates [templateName]) {
+    				console.warn('Template ' + templateName + ' not found. Applying simple polyfill.');
+    				templates [templateName] = document.createElement('div');
+    			}
+    			
+    			var domTree = new DOMTree(templates [templateName], templateName);
     			options = options || {};
     			
     			if (options.parent) {
