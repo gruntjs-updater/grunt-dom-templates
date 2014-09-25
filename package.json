@@ -40,6 +40,8 @@
     "dom",
     "templates",
     "templating",
+    "template",
+    "grunt",
     "html"
   ]
 }
