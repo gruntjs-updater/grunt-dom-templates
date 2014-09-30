@@ -75,14 +75,6 @@ There are no options at this time. Simply provide the output file and the source
 ```
 
 ```js
-require.config({
-    paths: {
-        'dom-templates': '.compiled/templates'
-    }
-});
-```
-
-```js
     var rivetsView = rivets.bind(card.tpl.getRootNode(), {
         category: category,
         products: products.models,
@@ -92,10 +84,19 @@ require.config({
     });
 ```
 
-The templates service exposes two methods
 ```js
-    tpl(templateName).getRootNode();
-    tpl(templateName).getNodeByName(nodeName);
+require.config({
+    paths: {
+        'dom-templates': '.compiled/templates'
+    }
+});
+```
+
+```js
+require(['dom-templates'], function (tpl) {
+    console.log(tpl('category-card').getRootNode());
+    console.log(tpl('category-card').getNodeByName('content'));
+});
 ```
  
 ## Contributing
