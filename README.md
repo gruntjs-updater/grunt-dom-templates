@@ -20,70 +20,68 @@ grunt.loadNpmTasks('grunt-dom-templates');
 ## The "dom_templates" task
 
 ### Overview
-In your project's Gruntfile, add a section named `dom_templates` to the data object passed into `grunt.initConfig()`.
+The task compiles all you partial html templates into a single js service file. 
 
 ```js
 grunt.initConfig({
-  dom_templates: {
-    options: {
-      // Task-specific options go here.
+    dom_templates: {
+        compile: {
+            files: {
+                '<%= config.directory.scripts %>/.compiled/templates.js': ['<%= config.directory.templates %>/**/*.html']
+            }
+        }
     },
-    your_target: {
-      // Target-specific file lists and/or options go here.
+    
+    watch: {
+        dom_templates: {
+            files: ['<%= config.directory.templates %>/**/*.html'],
+            options: { livereload: true },
+            tasks: ['dom_templates:compile']
+        }
     },
-  },
+        
 });
 ```
 
 ### Options
 
-#### options.separator
-Type: `String`
-Default value: `',  '`
-
-A string value that is used to do something with whatever.
-
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
-
-A string value that is used to do something else with whatever else.
-
+There are no options at this time. Simply provide the output file and the source html files.
+ 
 ### Usage Examples
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
-
-```js
-grunt.initConfig({
-  dom_templates: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-});
+```html
+<div tpl-name="category-card" class="category" tpl-node-name="content">
+    <h1>{ category:name }</h1>
+    
+    <div class="products">
+        <div class ="products__product" rv-each-product="products" rv-on-click="open">
+            <h2>{ product:name }</h2>
+            <div class="products__product__price"><span>{ product:price | currency }</span></div>
+            <div class="products__product__image"><img rv-src="product:image | gallery-img-url" /></div>
+            <div class="products__product__details"><button>Details</button></div>
+        </div>
+    </div>
+</div>
 ```
 
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
-
 ```js
-grunt.initConfig({
-  dom_templates: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-});
+    var rivetsView = rivets.bind(card.tpl.getRootNode(), {
+        category: category,
+        products: products.models,
+        open: function (event, models) {
+            appRouter.navigate(cardUrl('product', { id: models.product.get('id') }));
+        }
+    });
+```
+
+The templates service exposes two methods
+```js
+    tpl(templateName).getRootNode();
+    tpl(templateName).getNodeByName(nodeName);
 ```
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+0.1.14 first release
