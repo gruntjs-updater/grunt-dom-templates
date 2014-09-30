@@ -1,6 +1,6 @@
 # grunt-dom-templates
 
-> Smart partial HTML template loading solution. Compiles you partial HTML templates into a javascript service. The service is an AMD module. 
+> Smart partial HTML template compiling and loading solution. Compiles you partial HTML templates into a javascript service. The service is an AMD module. 
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`

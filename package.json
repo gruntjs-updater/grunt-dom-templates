@@ -1,7 +1,7 @@
 {
   "name": "grunt-dom-templates",
-  "description": "The best Grunt plugin ever.",
-  "version": "0.1.15",
+  "description": "Smart partial HTML templates compiler and loader.",
+  "version": "0.1.16",
   "homepage": "https://github.com/kodmax/grunt-dom-templates",
   "author": {
     "name": "kodmax",
