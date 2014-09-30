@@ -1,6 +1,6 @@
 # grunt-dom-templates
 
-> The best Grunt plugin ever.
+> Smart partial HTML template loading solution. Compiles you partial HTML templates into a javascript service. The service is an AMD module. 
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
@@ -62,16 +62,6 @@ There are no options at this time.
         </div>
     </div>
 </div>
-```
-
-```js
-    var rivetsView = rivets.bind(card.tpl.getRootNode(), {
-        category: category,
-        products: products.models,
-        open: function (event, models) {
-            appRouter.navigate(cardUrl('product', { id: models.product.get('id') }));
-        }
-    });
 ```
 
 ```js

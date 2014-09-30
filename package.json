@@ -1,7 +1,7 @@
 {
   "name": "grunt-dom-templates",
   "description": "The best Grunt plugin ever.",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "homepage": "https://github.com/kodmax/grunt-dom-templates",
   "author": {
     "name": "kodmax",
@@ -42,6 +42,8 @@
     "templating",
     "template",
     "grunt",
-    "html"
+    "html",
+    "requirejs",
+    "rivets"
   ]
 }
