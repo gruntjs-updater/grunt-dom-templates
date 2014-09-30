@@ -45,7 +45,7 @@ grunt.initConfig({
 
 ### Options
 
-There are no options at this time. Simply provide the output file and the source html files.
+There are no options at this time.
  
 ### Usage Examples
 
