@@ -74,12 +74,30 @@ There are no options at this time. Simply provide the output file and the source
     });
 ```
 
+```js
+require.config({
+    paths: {
+        'dom-templates': '.compiled/templates'
+    }
+});
+```
+
+```js
+    var rivetsView = rivets.bind(card.tpl.getRootNode(), {
+        category: category,
+        products: products.models,
+        open: function (event, models) {
+            appRouter.navigate(cardUrl('product', { id: models.product.get('id') }));
+        }
+    });
+```
+
 The templates service exposes two methods
 ```js
     tpl(templateName).getRootNode();
     tpl(templateName).getNodeByName(nodeName);
 ```
-
+ 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
